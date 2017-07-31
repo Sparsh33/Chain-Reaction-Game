@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:text="HOW TO PLAY"
+        android:textSize="32sp"
+        android:fontFamily="casual"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="110dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:textSize="16sp"
+        android:text="The objective of the game is to take control of the board by reducing the boxes of other opponents to zero.
+Each box has a certain capacity which is determined by the number of boxes touching it in horizontal and vertical directions(for eg., corner boxes have capacity two and the box in the middle has capacity four). When the capacity of a certain box is reached, the box explodes capturing other boxes in horizontal and vertical lines with that box. Player with no boxes left of his color is eliminated.
+If timer is enabled, each player gets particular time to complete his/her chance and if he/she fails to do so, that player's chance will be skipped."
+        android:padding="10dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginLeft="5dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OK"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/colorWhite"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:fontFamily="casual"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/okTextView"/>
+
+
+</RelativeLayout>

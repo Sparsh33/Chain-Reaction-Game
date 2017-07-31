@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/settingslinearLayout"
+        >
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:text="Player 1"
+            android:textSize="20sp"
+            android:fontFamily="casual"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textStyle="bold"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="30dp"
+            android:id="@+id/playerTextView"
+            android:textColor="#fff"/>
+
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/colorSpinner"
+            android:layout_marginLeft="120dp"
+            android:layout_gravity="center_vertical">
+        </Spinner>
+
+
+        <!--<FrameLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/frameLayout"-->
+            <!--android:layout_marginLeft="170dp"-->
+            <!--android:layout_gravity="center_vertical">-->
+
+        <!--</FrameLayout>-->
+    </LinearLayout>
+
+</LinearLayout>

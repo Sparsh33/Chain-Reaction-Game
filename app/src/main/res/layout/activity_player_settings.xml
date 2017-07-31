@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.sparshgupta.chainreaction1.PlayerSettingsActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/settingsImageView"/>
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="430dp"
+        android:id="@+id/playersListView"
+        android:layout_marginTop="120dp">
+    </ListView>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DONE"
+        android:fontFamily="casual"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="24sp"
+        android:id="@+id/doneTextView"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"/>
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="CANCEL"-->
+        <!--android:fontFamily="casual"-->
+        <!--android:textAppearance="@style/TextAppearance.AppCompat"-->
+        <!--android:textSize="24sp"-->
+        <!--android:textStyle="bold"-->
+        <!--android:layout_marginBottom="20dp"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:id="@+id/cancelTextView"/>-->
+
+
+</RelativeLayout>

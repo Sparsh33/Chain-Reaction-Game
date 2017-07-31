@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.sparshgupta.chainreaction1.GameSettingsActivityMultiplayer">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/settingsImageView"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="85dp"
+        android:layout_marginTop="200dp"
+        android:id="@+id/linearLayout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:fontFamily="casual"
+            android:text="PLAYERS"
+            android:textColor="#fff"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:id="@+id/playerTextView"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textColor="#fff"
+            android:layout_marginLeft="0dp"
+            android:fontFamily="casual"
+            android:textStyle="bold"
+            android:text="GRID SIZE"
+            android:layout_marginTop="70dp"
+            android:id="@+id/gridSizeTextView"/>
+
+        <CheckBox
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:id="@+id/timerCheckBox"
+            android:layout_marginTop="140dp" />
+
+        <TextView
+            android:id="@+id/timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:fontFamily="casual"
+            android:text="TIMER"
+            android:textColor="#fff"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_alignTop="@+id/timerCheckBox"/>
+
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/noOfPlayerSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="130dp">
+
+        </android.support.v7.widget.AppCompatSpinner>
+
+        <android.support.v7.widget.AppCompatSpinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/gridSpinner"
+            android:layout_alignTop="@+id/gridSizeTextView"
+            android:layout_alignLeft="@+id/noOfPlayerSpinner">
+
+        </android.support.v7.widget.AppCompatSpinner>
+
+        <android.support.v7.widget.AppCompatSpinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/noOfPlayerSpinner"
+            android:layout_alignTop="@+id/timer"
+            android:id="@+id/timerSpinner">
+        </android.support.v7.widget.AppCompatSpinner>
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/playerSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="480dp"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="monospace"
+        android:text="PLAYER SETTINGS"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:textSize="16sp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:text="BACK"
+        android:textSize="24sp"
+        android:textColor="#fff"
+        android:fontFamily="casual"
+        android:textStyle="bold"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/backTextView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/warningTextView"
+        android:text="@string/warning"
+        android:layout_marginTop="380dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/colorGrey"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="START"
+        android:id="@+id/startTextView"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:textSize="24sp"
+        android:textColor="#fff"
+        android:fontFamily="casual"
+        android:textStyle="bold"/>
+
+</RelativeLayout>
