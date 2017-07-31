@@ -71,13 +71,13 @@ public class GameplayActivity extends AppCompatActivity implements View.OnClickL
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gameplay);
-        ImageView imageView = (ImageView)findViewById(R.id.gameImageView);
+        ImageView imageView = (ImageView) findViewById(R.id.gameImageView);
         imageView.setImageBitmap(EfficientImages.decodeSampledBitmapFromResource(this.getResources(), R.drawable.gamescreen, 720, 1280));
-        gameLayout = (LinearLayout)findViewById(R.id.GameLinearLayout);
+        gameLayout = (LinearLayout) findViewById(R.id.GameLinearLayout);
         Intent intent = getIntent();
         time = intent.getIntExtra(TIME, -1);
         isTimerOn = intent.getBooleanExtra(CHECKBOX_CHECKED, false);
-        timerTextView = (TextView)findViewById(R.id.timeTextView);
+        timerTextView = (TextView) findViewById(R.id.timeTextView);
         noOfPlayers = intent.getIntExtra(NO_PLAYERS, 2);
         gridSize = intent.getStringExtra(GRID_SIZE);
         sharedPreferences = getSharedPreferences(PREFERENCE_FILE_CHAIN_REACTION, MODE_PRIVATE);
@@ -85,14 +85,14 @@ public class GameplayActivity extends AppCompatActivity implements View.OnClickL
         isVibration = sharedPreferences.getBoolean(VIBRATION_STATE, true);
         final MediaPlayer mp = MediaPlayer.create(this, R.raw.click);
         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        settingsImageView = (ImageView)findViewById(R.id.settingsImageView);
+        settingsImageView = (ImageView) findViewById(R.id.settingsImageView);
         settingsImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isSound){
+                if (isSound) {
                     mp.start();
                 }
-                if(isVibration){
+                if (isVibration) {
                     vibrator.vibrate(50);
                 }
                 //pause timer
@@ -103,17 +103,17 @@ public class GameplayActivity extends AppCompatActivity implements View.OnClickL
                 //resume timer
             }
         });
-        pauseImageView = (ImageView)findViewById(R.id.pauseImageView);
+        pauseImageView = (ImageView) findViewById(R.id.pauseImageView);
         pauseImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isSound){
+                if (isSound) {
                     mp.start();
                 }
-                if(isVibration){
+                if (isVibration) {
                     vibrator.vibrate(50);
                 }
-                if(countDownTimerPausable != null)
+                if (countDownTimerPausable != null)
                     countDownTimerPausable.pause();
 
                 AlertDialog.Builder dialog = new AlertDialog.Builder(GameplayActivity.this);
@@ -122,9 +122,9 @@ public class GameplayActivity extends AppCompatActivity implements View.OnClickL
                 dialog.setPositiveButton("Resume", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if(countDownTimerPausable != null && countDownTimerPausable.isPaused()){
+                        if (countDownTimerPausable != null && countDownTimerPausable.isPaused()) {
                             countDownTimerPausable.start();
-                        }else{
+                        } else {
                             dialog.cancel();
                         }
                     }
@@ -132,7 +132,7 @@ public class GameplayActivity extends AppCompatActivity implements View.OnClickL
                 dialog.setNegativeButton("QUIT", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if(countDownTimerPausable != null){
+                        if (countDownTimerPausable != null) {
                             countDownTimerPausable.cancel();
                             countDownTimerPausable = null;
                         }
@@ -155,32 +155,32 @@ public class GameplayActivity extends AppCompatActivity implements View.OnClickL
         colorLibrary[9] = R.color.colorCyan;
         colorCodes = new int[noOfPlayers];
         PlayerSettingsClass playerSettingsClass;
-        for(int i = 0; i < noOfPlayers; i++){
+        for (int i = 0; i < noOfPlayers; i++) {
             playerSettingsClass = new Select().from(PlayerSettingsClass.class).where("remote_Id = ?", i).executeSingle();
             int temp = playerSettingsClass.colorPos;
             colorCodes[i] = colorLibrary[temp];
         }
-        playerChanceImageView = (CircleImageView)findViewById(R.id.playerChanceImageView);
-        restartTextView = (TextView)findViewById(R.id.restartTextView);
+        playerChanceImageView = (CircleImageView) findViewById(R.id.playerChanceImageView);
+        restartTextView = (TextView) findViewById(R.id.restartTextView);
         restartTextView.setOnClickListener(this);
-        undoTextView = (TextView)findViewById(R.id.undoTextView);
+        undoTextView = (TextView) findViewById(R.id.undoTextView);
         undoTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isVibration){
+                if (isVibration) {
                     vibrator.vibrate(50);
                 }
-                if(isGameOver)
+                if (isGameOver)
                     return;
                 restorePrevState();
                 redoHelperState();
             }
         });
-        quitTextView = (TextView)findViewById(R.id.quitTextView);
+        quitTextView = (TextView) findViewById(R.id.quitTextView);
         quitTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isVibration){
+                if (isVibration) {
                     vibrator.vibrate(50);
                 }
                 //alert dialog
@@ -190,7 +190,7 @@ public class GameplayActivity extends AppCompatActivity implements View.OnClickL
                 dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if(countDownTimerPausable != null){
+                        if (countDownTimerPausable != null) {
                             countDownTimerPausable.cancel();
                             countDownTimerPausable = null;
                         }
@@ -209,7 +209,6 @@ public class GameplayActivity extends AppCompatActivity implements View.OnClickL
                 dialog.create().show();
             }
         });
-      //  FullScreencall();
         currentApiVersion = android.os.Build.VERSION.SDK_INT;
 
         final int flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -220,8 +219,7 @@ public class GameplayActivity extends AppCompatActivity implements View.OnClickL
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
 
         // This work only for android 4.4+
-        if(currentApiVersion >= Build.VERSION_CODES.KITKAT)
-        {
+        if (currentApiVersion >= Build.VERSION_CODES.KITKAT) {
 
             getWindow().getDecorView().setSystemUiVisibility(flags);
 
@@ -230,14 +228,11 @@ public class GameplayActivity extends AppCompatActivity implements View.OnClickL
             // show up and won't hide
             final View decorView = getWindow().getDecorView();
             decorView
-                    .setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener()
-                    {
+                    .setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
 
                         @Override
-                        public void onSystemUiVisibilityChange(int visibility)
-                        {
-                            if((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0)
-                            {
+                        public void onSystemUiVisibilityChange(int visibility) {
+                            if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
                                 decorView.setSystemUiVisibility(flags);
                             }
                         }
@@ -248,7 +243,7 @@ public class GameplayActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     protected void onPause() {
-        if(countDownTimerPausable != null){
+        if (countDownTimerPausable != null) {
             countDownTimerPausable.pause();
         }
         super.onPause();
@@ -256,7 +251,7 @@ public class GameplayActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     protected void onResume() {
-        if(countDownTimerPausable != null){
+        if (countDownTimerPausable != null) {
             countDownTimerPausable.start();
         }
         super.onResume();
@@ -264,8 +259,8 @@ public class GameplayActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == 1){
-            if(resultCode == RESULT_OK){
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
                 isSound = sharedPreferences.getBoolean(SOUND_STATE, true);
                 isVibration = sharedPreferences.getBoolean(VIBRATION_STATE, true);
             }
@@ -276,11 +271,9 @@ public class GameplayActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
-    public void onWindowFocusChanged(boolean hasFocus)
-    {
+    public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        if(currentApiVersion >= Build.VERSION_CODES.KITKAT && hasFocus)
-        {
+        if (currentApiVersion >= Build.VERSION_CODES.KITKAT && hasFocus) {
             getWindow().getDecorView().setSystemUiVisibility(
                     View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                             | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
@@ -293,8 +286,8 @@ public class GameplayActivity extends AppCompatActivity implements View.OnClickL
 
     private void redoHelperState() {
         State tempState;
-        for(int i = 0; i < rows; i++){
-            for(int j = 0; j < columns; j++){
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
                 tempState = prevState[i][j];
                 helperState[i][j].setPrevplayer(tempState.getPrevplayer());
                 helperState[i][j].setPrevvalue(tempState.getPrevvalue());
@@ -303,35 +296,55 @@ public class GameplayActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void setUpGame() {
-        if(isTimerOn){
+        if (isTimerOn) {
             timerTextView.setText(time + " sec");
         }
-        if(countDownTimerPausable!=null){
+        if (countDownTimerPausable != null) {
             countDownTimerPausable.cancel();
             countDownTimerPausable = null;
         }
+        countDownTimerPausable = new CountDownTimerPausable(time * 1000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                if (millisUntilFinished / 1000 <= 3) {
+                    timerTextView.setTextColor(getResources().getColor(R.color.colorRed));
+                } else {
+                    timerTextView.setTextColor(getResources().getColor(R.color.colorBrown));
+                }
+                timerTextView.setText(millisUntilFinished / 1000 + " sec");
+            }
+
+            @Override
+            public void onFinish() {
+                if (noOfPlayers == 2) {
+                    isGameOver = true;
+                    Toast.makeText(GameplayActivity.this, "Player 1 lost.", Toast.LENGTH_SHORT).show();
+                } else {
+                    playerChance = (playerChance + 1) % noOfPlayers;
+                }
+            }
+        };
         checkTimeOver = false;
         isGameOver = false;
         gameLayout.removeAllViews();
-        if(gridSize.equals("Small")){
+        if (gridSize.equals("Small")) {
             rows = 7;
             columns = 5;
-        }else if(gridSize.equals("Medium")){
+        } else if (gridSize.equals("Medium")) {
             rows = 9;
             columns = 6;
-        }
-        else{
+        } else {
             rows = 12;
             columns = 8;
         }
         playerScore = new int[noOfPlayers];
-        for(int i = 0; i < noOfPlayers; i++){
+        for (int i = 0; i < noOfPlayers; i++) {
             playerScore[i] = -1;
         }
         //setColorCodes for each player
         //setting up board
         rowsLinearLayout = new LinearLayout[rows];
-        for(int i = 0; i < rows; i++){
+        for (int i = 0; i < rows; i++) {
             rowsLinearLayout[i] = new LinearLayout(this);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1);
             rowsLinearLayout[i].setLayoutParams(params);
@@ -339,19 +352,19 @@ public class GameplayActivity extends AppCompatActivity implements View.OnClickL
         }
 
         buttons = new CustomButton[rows][columns];
-        for(int i = 0; i < rows; i++){
-            for(int j = 0; j < columns; j++){
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
                 buttons[i][j] = new CustomButton(this);
                 LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1);
                 buttons[i][j].setLayoutParams(p);
                 buttons[i][j].setValue(-1);
-                if((i == 0 || i == rows - 1) && (j != 0 && j != columns - 1)){
+                if ((i == 0 || i == rows - 1) && (j != 0 && j != columns - 1)) {
                     buttons[i][j].setMax(3);
-                }else if((i == 0 || i == rows - 1) && (j == 0 || j == columns - 1)){
+                } else if ((i == 0 || i == rows - 1) && (j == 0 || j == columns - 1)) {
                     buttons[i][j].setMax(2);
-                }else if((i != 0 || i != rows - 1) && (j == 0 || j == columns - 1)){
+                } else if ((i != 0 || i != rows - 1) && (j == 0 || j == columns - 1)) {
                     buttons[i][j].setMax(3);
-                }else{
+                } else {
                     buttons[i][j].setMax(4);
                 }
                 buttons[i][j].setRow(i);
@@ -363,16 +376,16 @@ public class GameplayActivity extends AppCompatActivity implements View.OnClickL
             }
         }
         prevState = new State[rows][columns];
-        for(int i = 0; i < rows; i++){
-            for(int j = 0; j < columns; j++){
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
                 prevState[i][j] = new State();
                 prevState[i][j].setPrevplayer(-1);
                 prevState[i][j].setPrevvalue(-1);
             }
         }
         helperState = new State[rows][columns];
-        for(int i = 0; i < rows; i++){
-            for(int j = 0; j < columns; j++){
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
                 helperState[i][j] = new State();
                 helperState[i][j].setPrevvalue(-1);
                 helperState[i][j].setPrevplayer(-1);
@@ -433,161 +446,113 @@ public class GameplayActivity extends AppCompatActivity implements View.OnClickL
                 countDownTimerPausable.cancel();
                 countDownTimerPausable = null;
             }
-//            countDownTimerPausable = new countDownTimerPausable(time * 1000, 1000){
-//
-//                @Override
-//                public void onTick(long millisUntilFinished) {
-//                    timerTextView.setText(millisUntilFinished / 1000 + " sec");
-//                }
-//
-//                @Override
-//                public void onFinish() {
-//                    checkTimeOver = true;
-//                    Toast.makeText(GameplayActivity.this, "OOPS! You missed your chance...time OVER.", Toast.LENGTH_SHORT).show();
-//                    iterations++;
-//                    int temp = playerChance;
-//                    playerChance = (playerChance + 1) % noOfPlayers;
-//                    calculateScore();
-//                    while(playerScore[playerChance] == -1 && iterations > noOfPlayers) {
-//                        playerChance = (playerChance + 1) % noOfPlayers;
-//                    }
-//                    populateImageViewView();
-//                    if(!isFirst){
-//                        updatePrevState();
-//                        if(prevPlayerChance == -1)
-//                            prevPlayerChance = 0;
-//                        else
-//                            prevPlayerChance = temp;
-//                    }
-//                    else{
-//                        isFirst = false;
-//                        prevPlayerChance = 0;
-//                    }
-//                    updateHelperState();
-//                    isGameOver = checkWinner();
-//                    if(isGameOver){
-//                        AlertDialog.Builder dialog = new AlertDialog.Builder(GameplayActivity.this);
-//                        dialog.setTitle("Game Over!");
-//                        dialog.setPositiveButton("RESTART", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                setUpGame();
-//                            }
-//                        });
-//                        dialog.setNegativeButton("MENU", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                GameplayActivity.this.finish();
-//                            }
-//                        });
-//                        dialog.create().show();
-//                    }
-//                    countDownTimerPausable.cancel();
-//                    countDownTimerPausable = null;
-//                }
-//            };
-//            countDownTimerPausable.start();
-//        }
-            countDownTimerPausable = new CountDownTimerPausable(time * 1000, 1000) {
-                @Override
-                public void onTick(long millisUntilFinished) {
-                    timerTextView.setText(millisUntilFinished / 1000 + " sec");
-                }
-
-                @Override
-                public void onFinish() {
-                    checkTimeOver = true;
-                    Toast.makeText(GameplayActivity.this, "OOPS! You missed your chance...time OVER.", Toast.LENGTH_SHORT).show();
-                    iterations++;
-                    int temp = playerChance;
-                    playerChance = (playerChance + 1) % noOfPlayers;
-                    calculateScore();
-                    while(playerScore[playerChance] == -1 && iterations > noOfPlayers) {
-                        playerChance = (playerChance + 1) % noOfPlayers;
-                    }
-                    populateImageViewView();
-                    if(!isFirst){
-                        updatePrevState();
-                        if(prevPlayerChance == -1)
-                            prevPlayerChance = 0;
-                        else
-                            prevPlayerChance = temp;
-                    }
-                    else{
-                        isFirst = false;
-                        prevPlayerChance = 0;
-                    }
-                    updateHelperState();
-                    isGameOver = checkWinner();
-                    if(isGameOver){
-                        AlertDialog.Builder dialog = new AlertDialog.Builder(GameplayActivity.this);
-                        dialog.setTitle("Game Over!");
-                        dialog.setPositiveButton("RESTART", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                setUpGame();
-                            }
-                        });
-                        dialog.setNegativeButton("MENU", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                GameplayActivity.this.finish();
-                            }
-                        });
-                        dialog.create().show();
-                    }
-                    countDownTimerPausable.cancel();
-                    countDownTimerPausable = null;
-                }
-
-            };
-            countDownTimerPausable.start();
+            setUpTimer().start();
         }
-            if (checkTimeOver) {
-                return;
-            }
-            work(button);
-            iterations++;
-            int temp = playerChance;
+        if (checkTimeOver) {
+            return;
+        }
+        work(button);
+        iterations++;
+        int temp = playerChance;
+        playerChance = (playerChance + 1) % noOfPlayers;
+        calculateScore();
+        while (playerScore[playerChance] == -1 && iterations > noOfPlayers) {
             playerChance = (playerChance + 1) % noOfPlayers;
-            calculateScore();
-            while (playerScore[playerChance] == -1 && iterations > noOfPlayers) {
-                playerChance = (playerChance + 1) % noOfPlayers;
-            }
-            populateImageViewView();
-            if (!isFirst) {
-                updatePrevState();
-                if (prevPlayerChance == -1)
-                    prevPlayerChance = 0;
-                else
-                    prevPlayerChance = temp;
-            } else {
-                isFirst = false;
+        }
+        populateImageViewView();
+        if (!isFirst) {
+            updatePrevState();
+            if (prevPlayerChance == -1)
                 prevPlayerChance = 0;
-            }
-            updateHelperState();
-            if (isGameOver) {
-                AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-                dialog.setTitle("Game Over!");
-                dialog.setPositiveButton("RESTART", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        setUpGame();
-                    }
-                });
-                dialog.setNegativeButton("MENU", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        GameplayActivity.this.finish();
-                    }
-                });
-                dialog.create().show();
-                if (countDownTimerPausable != null) {
-                    countDownTimerPausable.cancel();
-                    countDownTimerPausable = null;
+            else
+                prevPlayerChance = temp;
+        } else {
+            isFirst = false;
+            prevPlayerChance = 0;
+        }
+        updateHelperState();
+        if (isGameOver) {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            dialog.setTitle("Game Over!");
+            dialog.setPositiveButton("RESTART", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    setUpGame();
                 }
+            });
+            dialog.setNegativeButton("MENU", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    GameplayActivity.this.finish();
+                }
+            });
+            dialog.create().show();
+            if (countDownTimerPausable != null) {
+                countDownTimerPausable.cancel();
+                countDownTimerPausable = null;
             }
         }
+    }
+
+    CountDownTimerPausable setUpTimer() {
+        countDownTimerPausable = new CountDownTimerPausable(time * 1000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                if (millisUntilFinished / 1000 <= 3) {
+                    timerTextView.setTextColor(getResources().getColor(R.color.colorRed));
+                } else {
+                    timerTextView.setTextColor(getResources().getColor(R.color.colorBrown));
+                }
+                timerTextView.setText(millisUntilFinished / 1000 + " sec");
+            }
+
+            @Override
+            public void onFinish() {
+                checkTimeOver = true;
+                Toast.makeText(GameplayActivity.this, "OOPS! You missed your chance...time OVER.", Toast.LENGTH_SHORT).show();
+                iterations++;
+                int temp = playerChance;
+                playerChance = (playerChance + 1) % noOfPlayers;
+                calculateScore();
+                while (playerScore[playerChance] == -1 && iterations > noOfPlayers) {
+                    playerChance = (playerChance + 1) % noOfPlayers;
+                }
+                populateImageViewView();
+                if (!isFirst) {
+                    updatePrevState();
+                    if (prevPlayerChance == -1)
+                        prevPlayerChance = 0;
+                    else
+                        prevPlayerChance = temp;
+                } else {
+                    isFirst = false;
+                    prevPlayerChance = 0;
+                }
+                updateHelperState();
+                isGameOver = checkWinner();
+                if (isGameOver) {
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(GameplayActivity.this);
+                    dialog.setTitle("Game Over!");
+                    dialog.setPositiveButton("RESTART", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            setUpGame();
+                        }
+                    });
+                    dialog.setNegativeButton("MENU", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            GameplayActivity.this.finish();
+                        }
+                    });
+                    dialog.create().show();
+                }
+                if(!isGameOver)
+                    setUpTimer().start();
+            }
+        };
+        return countDownTimerPausable;
+    }
 
     private void restorePrevState() {
         for(int i = 0; i < rows; i++){

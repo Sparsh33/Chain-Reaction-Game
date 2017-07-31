@@ -2,6 +2,33 @@
 <items version="2" >
 
     <item
+        is-multidex="true"
+        jar="/Users/sparshgupta/Desktop/Chain-Reaction-Game/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="/Users/sparshgupta/Desktop/Chain-Reaction-Game/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_c0bcbc1601df8da2c6041ca5929a561c63643b18/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/sparshgupta/Desktop/Chain-Reaction-Game/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="faacb6dae063234b9b4d17c83ede14d776e3aabc">
+        <dex dex="/Users/sparshgupta/Desktop/Chain-Reaction-Game/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_bca67682346e4bc3a8dd8b6f3d1128ddde11d781/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/sparshgupta/.gradle/caches/modules-2/files-2.1/com.michaelpardo/activeandroid/3.1.0-SNAPSHOT/4ab7b0182975bc57c49efc5e0b3baa4a10e4ec08/activeandroid-3.1.0-SNAPSHOT.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="4ab7b0182975bc57c49efc5e0b3baa4a10e4ec08">
+        <dex dex="/Users/sparshgupta/Desktop/Chain-Reaction-Game/app/build/intermediates/transforms/dex/debug/folders/1000/10/activeandroid-3.1.0-SNAPSHOT_65ebcd478759e625369d104e06956b701b3ff788/classes.dex" />
+    </item>
+    <item
         is-multidex="false"
         jar="/Users/sparshgupta/.gradle/caches/modules-2/files-2.1/com.michaelpardo/activeandroid/3.1.0-SNAPSHOT/4ab7b0182975bc57c49efc5e0b3baa4a10e4ec08/activeandroid-3.1.0-SNAPSHOT.jar"
         jumboMode="false"
