@@ -303,27 +303,29 @@ public class GameplayActivity extends AppCompatActivity implements View.OnClickL
             countDownTimerPausable.cancel();
             countDownTimerPausable = null;
         }
-        countDownTimerPausable = new CountDownTimerPausable(time * 1000, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                if (millisUntilFinished / 1000 <= 3) {
-                    timerTextView.setTextColor(getResources().getColor(R.color.colorRed));
-                } else {
-                    timerTextView.setTextColor(getResources().getColor(R.color.colorBrown));
+        if(isTimerOn) {
+            countDownTimerPausable = new CountDownTimerPausable(time * 1000, 1000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    if (millisUntilFinished / 1000 <= 3) {
+                        timerTextView.setTextColor(getResources().getColor(R.color.colorRed));
+                    } else {
+                        timerTextView.setTextColor(getResources().getColor(R.color.colorBrown));
+                    }
+                    timerTextView.setText(millisUntilFinished / 1000 + " sec");
                 }
-                timerTextView.setText(millisUntilFinished / 1000 + " sec");
-            }
 
-            @Override
-            public void onFinish() {
-                if (noOfPlayers == 2) {
-                    isGameOver = true;
-                    Toast.makeText(GameplayActivity.this, "Player 1 lost.", Toast.LENGTH_SHORT).show();
-                } else {
-                    playerChance = (playerChance + 1) % noOfPlayers;
+                @Override
+                public void onFinish() {
+                    if (noOfPlayers == 2) {
+                        isGameOver = true;
+                        Toast.makeText(GameplayActivity.this, "Player 1 lost.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        playerChance = (playerChance + 1) % noOfPlayers;
+                    }
                 }
-            }
-        };
+            };
+        }
         checkTimeOver = false;
         isGameOver = false;
         gameLayout.removeAllViews();
